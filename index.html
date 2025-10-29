@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>Sudden Illness First Aid Checkup</title>
+<style>
+    :root {
+        --bg: #f5f6fa;
+        --card: #ffffff;
+        --accent: #4a6cf7;
+        --accent-light: rgba(74,108,247,0.1);
+        --border: #d9dce8;
+        --text-dark: #1a1f36;
+        --text-mid: #4f556e;
+        --text-light: #8a90a6;
+        --radius-lg: 1rem;
+        --radius-sm: .5rem;
+        --shadow-card: 0 20px 40px rgba(0,0,0,0.06);
+        --shadow-btn: 0 10px 20px rgba(74,108,247,0.3);
+        --danger: #d72638;
+        --danger-light: rgba(215,38,56,0.08);
+        --good: #16a34a;
+        --good-light: rgba(22,163,74,0.08);
+        --warn: #f5a623;
+        --warn-light: rgba(245,166,35,0.12);
+        --font-stack: system-ui, -apple-system, BlinkMacSystemFont, "Inter", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+        background-color: var(--bg);
+        color: var(--text-dark);
+        font-family: var(--font-stack);
+        margin: 0;
+        padding: 2rem;
+        line-height: 1.45;
+    }
+
+    header {
+        max-width: 1100px;
+        margin: 0 auto 1.5rem auto;
+        display: grid;
+        gap: 1rem;
+    }
+
+    .top-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        align-items: flex-start;
+        justify-content: space-between;
+    }
+
+    h1 {
+        margin: 0;
+        font-size: clamp(1.4rem, 1vw + 1rem, 1.6rem);
+        font-weight: 600;
+        color: var(--text-dark);
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+    }
+
+    .badge {
+        font-size: .75rem;
+        background: var(--accent-light);
+        color: var(--accent);
+        padding: .25rem .5rem;
+        border-radius: var(--radius-sm);
+        font-weight: 500;
+        border: 1px solid var(--accent);
+        line-height: 1.2;
+    }
+
+    .desc {
+        font-size: .9rem;
+        color: var(--text-mid);
+        max-width: 70ch;
+    }
+
+    .timer-hint {
+        font-size: .8rem;
+        color: var(--text-light);
+    }
+
+    /* layout grid */
+    .layout {
+        max-width: 1100px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    @media(min-width: 900px){
+        .layout {
+            grid-template-columns: 2fr 1fr;
+        }
+    }
+
+    /* cards */
+    .card {
+        background: var(--card);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-card);
+        border: 1px solid var(--border);
+        padding: 1.25rem 1.25rem 1rem;
+    }
+
+    .card:not(:last-child){
+        margin-bottom: 1rem;
+    }
+
+    .card-header-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem 1rem;
+        justify-content: space-between;
+        align-items: baseline;
+        margin-bottom: 1rem;
+    }
+
+    .card h2 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        color: var(--text-dark);
+    }
+
+    .pill {
+        font-size: .7rem;
+        line-height: 1.2;
+        font-weight: 500;
+        border-radius: 999px;
+        padding: .25rem .5rem;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        display: inline-block;
+    }
+
+    .pill-emergency {
+        background: var(--danger-light);
+        color: var(--danger);
+        border-color: var(--danger);
+    }
+    .pill-assess {
+        background: var(--warn-light);
+        color: var(--warn);
+        border-color: var(--warn);
+    }
+    .pill-care {
+        background: var(--good-light);
+        color: var(--good);
+        border-color: var(--good);
+    }
+
+    .small-note {
+        color: var(--text-light);
+        font-size: .75rem;
+        line-height: 1.3;
+        max-width: 60ch;
+    }
+
+    /* form sections */
+    fieldset{
+        border: 0;
+        padding: 0;
+        margin: 0 0 1rem 0;
+    }
+    legend{
+        font-size:.9rem;
+        font-weight:600;
+        margin-bottom:.5rem;
+        color: var(--text-dark);
+    }
+    label{
+        font-size:.85rem;
+        color: var(--text-mid);
+        display:block;
+        margin-bottom:.25rem;
+        font-weight:500;
+    }
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+        width:100%;
+        font-size: .9rem;
+        font-family: inherit;
+        border-radius: var(--radius-sm);
+        border:1px solid var(--border);
+        background:#fff;
+        padding:.6rem .7rem;
+        color:var(--text-dark);
+        box-sizing:border-box;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    textarea:focus{
+        outline:2px solid var(--accent);
+        border-color:var(--accent);
+    }
+    textarea{
+        min-height:4rem;
+        resize:vertical;
+    }
+
+    .question-block{
+        margin-bottom:1rem;
+        border:1px solid var(--border);
+        border-radius:var(--radius-sm);
+        padding: .75rem .75rem .5rem;
+        background: #fff;
+    }
+    .q-text{
+        font-size:.9rem;
+        font-weight:600;
+        color:var(--text-dark);
+        margin-bottom:.5rem;
+    }
+    .q-options label{
+        font-weight:400;
+        display:flex;
+        align-items:flex-start;
+        gap:.5rem;
+        cursor:pointer;
+        color:var(--text-mid);
+        line-height:1.4;
+        padding:.4rem .5rem;
+        border-radius:var(--radius-sm);
+    }
+    .q-options label:hover{
+        background: var(--accent-light);
+        color: var(--text-dark);
+    }
+    .q-options input{
+        margin-top:.2rem;
+    }
+
+    /* matching grid */
+    .match-grid{
+        width:100%;
+        border-collapse:collapse;
+        font-size:.85rem;
+    }
+    .match-grid th{
+        text-align:left;
+        font-weight:600;
+        color:var(--text-dark);
+        border-bottom:2px solid var(--border);
+        padding:.5rem;
+        font-size:.8rem;
+    }
+    .match-grid td{
+        vertical-align:top;
+        border-bottom:1px solid var(--border);
+        padding:.5rem;
+        color:var(--text-mid);
+    }
+    .match-select{
+        max-width: 200px;
+    }
+
+    /* buttons */
+    .btn-row{
+        display:flex;
+        flex-wrap:wrap;
+        gap:.75rem;
+        margin-top:1rem;
+    }
+    button{
+        cursor:pointer;
+        border:0;
+        border-radius:var(--radius-sm);
+        font-size:.85rem;
+        font-weight:600;
+        line-height:1.2;
+        padding:.7rem .9rem;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:.5rem;
+        box-shadow: var(--shadow-card);
+        transition: box-shadow .12s, transform .12s;
+        background: var(--accent);
+        color:#fff;
+    }
+    button.small-btn{
+        font-size:.8rem;
+        padding:.55rem .7rem;
+        line-height:1.2;
+    }
+    button:hover{
+        box-shadow: var(--shadow-btn);
+        transform:translateY(-1px);
+    }
+    button:active{
+        transform:translateY(0);
+        box-shadow: var(--shadow-card);
+    }
+    button.alt{
+        background:#fff;
+        border:1px solid var(--border);
+        color:var(--text-dark);
+        box-shadow:none;
+    }
+    button.alt:hover{
+        box-shadow: var(--shadow-card);
+    }
+
+    .status-area{
+        font-size:.8rem;
+        line-height:1.4;
+        color:var(--text-mid);
+        background:#fff;
+        border:1px solid var(--border);
+        border-radius:var(--radius-sm);
+        padding:.6rem .75rem;
+        white-space:pre-wrap;
+        word-break:break-word;
+        max-height:8rem;
+        overflow:auto;
+    }
+
+    /* footer / legal-ish note */
+    footer{
+        max-width:1100px;
+        margin:2rem auto 0;
+        font-size:.7rem;
+        color:var(--text-light);
+        line-height:1.4;
+    }
+    .danger-callout{
+        background:var(--danger-light);
+        color:var(--danger);
+        border:1px solid var(--danger);
+        font-size:.75rem;
+        padding:.5rem .75rem;
+        border-radius:var(--radius-sm);
+        font-weight:500;
+        margin-top:.5rem;
+        line-height:1.35;
+    }
+
+    /* score display */
+    .score-box{
+        background:var(--good-light);
+        border:1px solid var(--good);
+        color:var(--text-dark);
+        font-size:.8rem;
+        border-radius:var(--radius-sm);
+        padding:.5rem .75rem;
+        line-height:1.4;
+        font-weight:500;
+        display:none;
+        white-space:pre-wrap;
+    }
+
+</style>
+</head>
+<body>
+
+<header>
+    <div class="top-row">
+        <h1>
+            🆘 Sudden Illness First Aid Checkup
+            <span class="badge">Grade 7 • ~30 min</span>
+        </h1>
+        <div class="timer-hint">Tip: Work honestly. This is practice, not a trick.</div>
+    </div>
+    <div class="desc">
+        You're the first person on the scene when someone suddenly gets sick (stroke, seizure,
+        diabetic emergency, allergic reaction, poisoning, etc). Your job: notice what's wrong,
+        call for help, keep them alive until professionals take over. This follows core
+        American Red Cross first aid priorities: check the scene, call 9-1-1 for life-threatening
+        emergencies, then care for the person by keeping their airway open, watching breathing,
+        and staying calm with them.
+    </div>
+</header>
+
+<main class="layout">
+
+    <!-- LEFT COLUMN: FORM / QUESTIONS -->
+    <section>
+        <!-- Student Info -->
+        <form id="illnessForm">
+
+            <div class="card">
+                <div class="card-header-row">
+                    <h2>
+                        👤 Student Info
+                        <span class="pill pill-assess">Identify yourself</span>
+                    </h2>
+                    <div class="small-note">
+                        Fill this out or you don't get credit.
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend>Who are you?</legend>
+                    <label for="firstName">First Name</label>
+                    <input id="firstName" name="firstName" type="text" placeholder="First Name" required />
+
+                    <label for="lastName" style="margin-top:.75rem;">Last Name</label>
+                    <input id="lastName" name="lastName" type="text" placeholder="Last Name" required />
+
+                    <label for="studentEmail" style="margin-top:.75rem;">School Email</label>
+                    <input id="studentEmail" name="studentEmail" type="email" placeholder="you@pccsk12.com" required />
+                </fieldset>
+
+                <div class="danger-callout">
+                    ⚠ Do NOT fake someone else's name/email. That’s a school issue.
+                </div>
+            </div>
+
+            <!-- Section A: Quick Check Knowledge / Matching -->
+            <div class="card">
+                <div class="card-header-row">
+                    <h2>
+                        🧠 Section A: Match the Illness to the Sign
+                        <span class="pill pill-assess">Know what you're seeing</span>
+                    </h2>
+                    <div class="small-note">
+                        Pick the BEST match for each situation.
+                    </div>
+                </div>
+
+                <table class="match-grid">
+                    <thead>
+                        <tr>
+                            <th style="width:55%;">What you're seeing</th>
+                            <th style="width:45%;">This is most likely...</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                1. Person’s face droops on one side, slurred speech, can’t lift one arm.
+                                (Think F.A.S.T.: Face, Arm, Speech, Time.)
+                            </td>
+                            <td>
+                                <select class="match-select" name="match1" id="match1">
+                                    <option value="">-- choose --</option>
+                                    <option>Stroke</option>
+                                    <option>Diabetic Emergency (Low Blood Sugar)</option>
+                                    <option>Seizure</option>
+                                    <option>Severe Allergic Reaction / Anaphylaxis</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                2. Person is confused, shaky, sweaty, saying “I feel weird,” and hasn’t eaten.
+                            </td>
+                            <td>
+                                <select class="match-select" name="match2" id="match2">
+                                    <option value="">-- choose --</option>
+                                    <option>Stroke</option>
+                                    <option>Diabetic Emergency (Low Blood Sugar)</option>
+                                    <option>Seizure</option>
+                                    <option>Poisoning</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                3. Person collapses and their muscles start jerking hard and fast. You
+                                can't get them to respond.
+                            </td>
+                            <td>
+                                <select class="match-select" name="match3" id="match3">
+                                    <option value="">-- choose --</option>
+                                    <option>Stroke</option>
+                                    <option>Seizure</option>
+                                    <option>Heat Cramps</option>
+                                    <option>Asthma Attack</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                4. Person was just stung by something, now their throat feels tight,
+                                lips are swelling, and they’re having trouble breathing.
+                            </td>
+                            <td>
+                                <select class="match-select" name="match4" id="match4">
+                                    <option value="">-- choose --</option>
+                                    <option>Minor Allergic Reaction</option>
+                                    <option>Severe Allergic Reaction / Anaphylaxis</option>
+                                    <option>Upset Stomach</option>
+                                    <option>Muscle Strain</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+            <!-- Section B: Scenario Multiple Choice -->
+            <div class="card">
+                <div class="card-header-row">
+                    <h2>
+                        🚑 Section B: Scenario Decisions
+                        <span class="pill pill-emergency">What do you do first?</span>
+                    </h2>
+                    <div class="small-note">
+                        Click the BEST answer.
+                    </div>
+                </div>
+
+                <!-- Q1 -->
+                <div class="question-block">
+                    <div class="q-text">
+                        B1. You’re in class. A student next to you suddenly drops their pencil and you see
+                        their face droop on one side. When they try to talk, it sounds like mmmrrrfff.
+                        What’s your FIRST move?
+                    </div>
+                    <div class="q-options">
+                        <label>
+                            <input type="radio" name="b1" value="A">
+                            A. Ask them to walk it off and see if it goes away in 30 minutes.
+                        </label>
+                        <label>
+                            <input type="radio" name="b1" value="B">
+                            B. Quietly record it on your phone for TikTok.
+                        </label>
+                        <label>
+                            <input type="radio" name="b1" value="C">
+                            C. Tell the nearest adult immediately / call 9-1-1. This could be a stroke.
+                        </label>
+                        <label>
+                            <input type="radio" name="b1" value="D">
+                            D. Give them water and tell them to sleep.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="question-block">
+                    <div class="q-text">
+                        B2. You’re at lunch. Your friend with diabetes didn’t eat breakfast. Now they’re
+                        pale, sweating, and acting confused. They’re still awake. Best move?
+                    </div>
+                    <div class="q-options">
+                        <label>
+                            <input type="radio" name="b2" value="A">
+                            A. Give them something with sugar (juice, glucose tabs if they have them),
+                            and get an adult.
+                        </label>
+                        <label>
+                            <input type="radio" name="b2" value="B">
+                            B. Force them to sprint laps in the gym.
+                        </label>
+                        <label>
+                            <input type="radio" name="b2" value="C">
+                            C. Tell them “mind over matter.”
+                        </label>
+                        <label>
+                            <input type="radio" name="b2" value="D">
+                            D. Try to make them throw up.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="question-block">
+                    <div class="q-text">
+                        B3. Someone collapses, hits the floor, and starts having a seizure. What is the
+                        correct response?
+                    </div>
+                    <div class="q-options">
+                        <label>
+                            <input type="radio" name="b3" value="A">
+                            A. Hold them down hard so they stop shaking.
+                        </label>
+                        <label>
+                            <input type="radio" name="b3" value="B">
+                            B. Put something in their mouth so they don’t “swallow their tongue.”
+                        </label>
+                        <label>
+                            <input type="radio" name="b3" value="C">
+                            C. Move desks/chairs away so they don’t smash into anything, call 9-1-1,
+                            and after it stops roll them on their side to help them breathe.
+                        </label>
+                        <label>
+                            <input type="radio" name="b3" value="D">
+                            D. Throw water on them to wake them up.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="question-block">
+                    <div class="q-text">
+                        B4. A classmate just ate something with peanuts. Now they say,
+                        “I... can’t... breathe,” and you see swelling in their lips. They have an
+                        epinephrine auto-injector (EpiPen) in their backpack and they’re pointing at it.
+                        What is the priority?
+                    </div>
+                    <div class="q-options">
+                        <label>
+                            <input type="radio" name="b4" value="A">
+                            A. Get the auto-injector, help them use it in the outer thigh, call 9-1-1.
+                        </label>
+                        <label>
+                            <input type="radio" name="b4" value="B">
+                            B. Tell them to just inhale slowly.
+                        </label>
+                        <label>
+                            <input type="radio" name="b4" value="C">
+                            C. Give them milk.
+                        </label>
+                        <label>
+                            <input type="radio" name="b4" value="D">
+                            D. Ask everyone to crowd around and film.
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="question-block">
+                    <div class="q-text">
+                        B5. You find someone in the science lab looking super dizzy after breathing in a
+                        strong chemical. They’re coughing and can’t stop. What matters most right now?
+                    </div>
+                    <div class="q-options">
+                        <label>
+                            <input type="radio" name="b5" value="A">
+                            A. Get them to fresh air / move them away from the poison source if it’s safe
+                            for you, then tell an adult / call 9-1-1.
+                        </label>
+                        <label>
+                            <input type="radio" name="b5" value="B">
+                            B. Tell them to “walk it off” inside the chemical room.
+                        </label>
+                        <label>
+                            <input type="radio" name="b5" value="C">
+                            C. You taste the chemical too so you can describe it.
+                        </label>
+                        <label>
+                            <input type="radio" name="b5" value="D">
+                            D. Ignore and go back to TikTok.
+                        </label>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Section C: Short Answer / Reflection -->
+            <div class="card">
+                <div class="card-header-row">
+                    <h2>
+                        💬 Section C: In Your Words
+                        <span class="pill pill-care">Stay with the person</span>
+                    </h2>
+                    <div class="small-note">
+                        Answer in 1-2 sentences. Straight to the point.
+                    </div>
+                </div>
+
+                <fieldset>
+                    <legend>C1. Why do you NOT give a seizing person water or put stuff in their mouth?</legend>
+                    <textarea id="c1" name="c1"
+                        placeholder="Type your answer..."></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <legend>C2. Someone might be embarrassed or scared during a medical emergency. What do you
+                        SAY to keep them calm while help is coming?</legend>
+                    <textarea id="c2" name="c2"
+                        placeholder="Type what you'd actually say..."></textarea>
+                </fieldset>
+
+                <fieldset>
+                    <legend>C3. List ONE clue that tells you it’s time to call 9-1-1 immediately.</legend>
+                    <textarea id="c3" name="c3"
+                        placeholder="Example: 'They have trouble breathing...' etc."></textarea>
+                </fieldset>
+            </div>
+
+            <!-- buttons inside form -->
+            <div class="btn-row">
+                <button type="button" id="saveBtn" class="small-btn" title="Saves to this browser only.">
+                    💾 Save Progress
+                </button>
+
+                <button type="button" id="loadBtn" class="small-btn" title="Loads from this browser only.">
+                    📂 Load Saved
+                </button>
+
+                <button type="button" id="scoreBtn" class="small-btn">
+                    ✅ Check My Score (All Sections)
+                </button>
+            </div>
+
+            <div id="scoreBox" class="score-box" style="margin-top:1rem;"></div>
+
+        </form>
+    </section>
+
+
+    <!-- RIGHT COLUMN: SUBMIT / STATUS / QUICK REF -->
+    <aside>
+
+        <!-- Quick Reference -->
+        <div class="card">
+            <div class="card-header-row">
+                <h2>
+                    📋 Quick Lifesaver Rules
+                    <span class="pill pill-emergency">Red Cross style</span>
+                </h2>
+            </div>
+            <div class="small-note">
+                1. <strong>Check</strong>: Is the scene safe for YOU? Do not become victim #2.
+                <br><br>
+                2. <strong>Call</strong>: If the person can’t breathe, is unconscious, is having stroke
+                signs, seizure that lasts more than a few minutes, or severe allergic reaction:
+                call 9-1-1 immediately.
+                <br><br>
+                3. <strong>Care</strong>: Stay with them. Keep airway clear. Stay calm. Use any
+                prescribed medical device (EpiPen, glucose, etc.) if they have it and you’re allowed to help.
+            </div>
+        </div>
+
+        <!-- Send / Teacher -->
+        <div class="card">
+            <div class="card-header-row">
+                <h2>
+                    📨 Turn In Your Work
+                    <span class="pill pill-assess">Email Mr. Slaughter</span>
+                </h2>
+            </div>
+
+            <div class="small-note" style="margin-bottom:.75rem;">
+                This builds an email to <strong>jason.slaughter@pccsk12.com</strong>
+                with your answers. You still have to hit Send in Gmail.
+            </div>
+
+            <div class="btn-row">
+                <button type="button" id="emailBtn">
+                    ✉ Generate Email
+                </button>
+            </div>
+
+            <div class="small-note" style="margin-top:1rem;">
+                If Gmail doesn't open, copy/paste the summary below into an email to
+                <strong>jason.slaughter@pccsk12.com</strong> with subject “Sudden Illness”.
+            </div>
+
+            <div id="statusArea" class="status-area" style="margin-top:.75rem;">
+                (Your answer summary will appear here.)
+            </div>
+
+        </div>
+
+        <!-- Privacy note -->
+        <div class="card">
+            <div class="card-header-row">
+                <h2>
+                    🔐 Save / Privacy
+                    <span class="pill pill-care">Local only</span>
+                </h2>
+            </div>
+            <div class="small-note">
+                “Save Progress” stores your answers in <strong>this browser only</strong> using
+                localStorage. It does NOT send anything to the internet.
+                If you clear your browser data, it's gone.
+            </div>
+        </div>
+
+    </aside>
+</main>
+
+<footer>
+    This activity is classroom first aid education. You are not a doctor. If someone is in
+    danger in real life: <strong>get an adult and/or call 9-1-1 immediately.</strong><br><br>
+    Stroke signs: F.A.S.T. (Face drooping, Arm weakness, Speech trouble, Time to call 9-1-1).
+    Seizure care: protect head, clear space, roll to side after shaking stops, call for help if it
+    lasts more than a few minutes or it’s their first seizure. For a known diabetic low blood sugar
+    emergency and they’re awake: give sugar. For severe allergic reaction with trouble breathing:
+    use their prescribed epinephrine and call 9-1-1.
+</footer>
+
+<script>
+(function(){
+
+    // ============
+    // UTIL
+    // ============
+    function getVal(name){
+        const f = document.getElementById('illnessForm');
+        const el = f.querySelector('[name="'+name+'"]');
+        if(!el){return "";}
+        if(el.type === 'radio'){
+            const checked = f.querySelector('input[name="'+name+'"]:checked');
+            return checked ? checked.value : "";
+        }
+        return el.value || "";
+    }
+
+    function getAllVals(){
+        const data = {
+            firstName: document.getElementById('firstName').value.trim(),
+            lastName: document.getElementById('lastName').value.trim(),
+            studentEmail: document.getElementById('studentEmail').value.trim(),
+
+            match1: document.getElementById('match1').value,
+            match2: document.getElementById('match2').value,
+            match3: document.getElementById('match3').value,
+            match4: document.getElementById('match4').value,
+
+            b1: getVal('b1'),
+            b2: getVal('b2'),
+            b3: getVal('b3'),
+            b4: getVal('b4'),
+            b5: getVal('b5'),
+
+            c1: document.getElementById('c1').value.trim(),
+            c2: document.getElementById('c2').value.trim(),
+            c3: document.getElementById('c3').value.trim()
+        };
+        return data;
+    }
+
+    function setAllVals(data){
+        if(!data) return;
+        if(data.firstName !== undefined) document.getElementById('firstName').value = data.firstName;
+        if(data.lastName !== undefined) document.getElementById('lastName').value = data.lastName;
+        if(data.studentEmail !== undefined) document.getElementById('studentEmail').value = data.studentEmail;
+
+        if(data.match1 !== undefined) document.getElementById('match1').value = data.match1;
+        if(data.match2 !== undefined) document.getElementById('match2').value = data.match2;
+        if(data.match3 !== undefined) document.getElementById('match3').value = data.match3;
+        if(data.match4 !== undefined) document.getElementById('match4').value = data.match4;
+
+        if(data.b1 !== undefined){
+            const el = document.querySelector('input[name="b1"][value="'+data.b1+'"]');
+            if(el) el.checked = true;
+        }
+        if(data.b2 !== undefined){
+            const el = document.querySelector('input[name="b2"][value="'+data.b2+'"]');
+            if(el) el.checked = true;
+        }
+        if(data.b3 !== undefined){
+            const el = document.querySelector('input[name="b3"][value="'+data.b3+'"]');
+            if(el) el.checked = true;
+        }
+        if(data.b4 !== undefined){
+            const el = document.querySelector('input[name="b4"][value="'+data.b4+'"]');
+            if(el) el.checked = true;
+        }
+        if(data.b5 !== undefined){
+            const el = document.querySelector('input[name="b5"][value="'+data.b5+'"]');
+            if(el) el.checked = true;
+        }
+
+        if(data.c1 !== undefined) document.getElementById('c1').value = data.c1;
+        if(data.c2 !== undefined) document.getElementById('c2').value = data.c2;
+        if(data.c3 !== undefined) document.getElementById('c3').value = data.c3;
+    }
+
+    // ============
+    // SAVE / LOAD
+    // ============
+    const SAVE_KEY = "suddenIllnessWorksheet_v1";
+
+    function saveProgress(){
+        try{
+            const data = getAllVals();
+            localStorage.setItem(SAVE_KEY, JSON.stringify(data));
+            showStatus("Saved locally ✅ (If you clear browser data, it's gone.)");
+        }catch(err){
+            console.error(err);
+            showStatus("Save failed ❌ Your browser might be blocking localStorage.");
+        }
+    }
+
+    function loadProgress(){
+        try{
+            const raw = localStorage.getItem(SAVE_KEY);
+            if(!raw){
+                showStatus("No saved data found.");
+                return;
+            }
+            const data = JSON.parse(raw);
+            setAllVals(data);
+            showStatus("Loaded saved work ✅");
+        }catch(err){
+            console.error(err);
+            showStatus("Load failed ❌");
+        }
+    }
+
+    // ============
+    // SHORT ANSWER GRADING (gentle)
+    // ============
+    /*
+        We are NOT being picky here. We're looking for basic safety ideas.
+
+        C1 (seizure / water / mouth):
+            Key points we accept:
+              - "choke", "choking", "block airway", "can't swallow", "can't safely swallow",
+              - "bite tongue" is NOT actually the goal, so alone that's not enough unless they also mention "never put anything in mouth".
+              - "they could aspirate" / "they could inhale it"
+              - "can't control muscles"
+            Hint if missing:
+              "Hint: During a seizure they can't control swallowing. Liquid/objects can block breathing."
+
+        C2 (calm language):
+            We accept any supportive language like:
+              - "I'm here", "stay with you", "help is coming", "you're okay", "I'm not leaving".
+            Hint if missing:
+              "Hint: You should sound calm and let them know help is coming and you’ll stay with them."
+
+        C3 (call 9-1-1 clues):
+            We accept:
+              - "not breathing / trouble breathing"
+              - "unconscious / won't wake up / passed out"
+              - "stroke signs / face drooping / slurred speech"
+              - "severe allergic reaction / can't breathe / throat swelling"
+              - "seizure lasting more than a few minutes"
+            Hint if missing:
+              "Hint: Think 'life-threatening' stuff: can't breathe, not awake, face drooping = stroke, etc."
+    */
+    function gradeShortAnswers(data){
+        const results = {};
+
+        // normalize helper
+        function norm(t){
+            return (t || "").toLowerCase();
+        }
+
+        // --- C1 ---
+        const c1 = norm(data.c1);
+        let c1correct = false;
+        let c1why = "";
+        if(
+            c1.includes("choke") ||
+            c1.includes("choking") ||
+            c1.includes("block") && c1.includes("air") ||
+            c1.includes("airway") ||
+            c1.includes("can't swallow") ||
+            c1.includes("cannot swallow") ||
+            c1.includes("can't control") && c1.includes("muscle") ||
+            c1.includes("swallow it into lungs") ||
+            c1.includes("aspirat") // aspirate / aspiration
+        ){
+            c1correct = true;
+            c1why = "Good. You said they could choke / can't safely swallow during a seizure.";
+        } else if (
+            c1.includes("don't put anything in their mouth") ||
+            c1.includes("nothing in their mouth")
+        ){
+            // partial credit but still hint
+            c1correct = false;
+            c1why = "Almost there. You said not to put stuff in their mouth. Add that it's dangerous because they can't swallow and could choke.";
+        } else {
+            c1correct = false;
+            c1why = "Hint: During a seizure they can't control swallowing, so liquid/objects can block their airway and choke them.";
+        }
+        results.c1 = {correct: c1correct, feedback: c1why};
+
+        // --- C2 ---
+        const c2 = norm(data.c2);
+        let c2correct = false;
+        let c2why = "";
+        if(
+            c2.includes("i'm here") ||
+            c2.includes("im here") ||
+            c2.includes("i am here") ||
+            c2.includes("stay with you") ||
+            c2.includes("help is coming") ||
+            c2.includes("you're okay") ||
+            c2.includes("youre okay") ||
+            c2.includes("not leaving") ||
+            c2.includes("i won't leave") ||
+            c2.includes("i will stay") ||
+            c2.includes("stay calm") && c2.includes("help")
+        ){
+            c2correct = true;
+            c2why = "Nice. You’re keeping them calm and telling them you’ll stay / help is coming.";
+        } else {
+            c2correct = false;
+            c2why = "Hint: Say something calm like 'I'm here with you, help is on the way, you're not alone.'";
+        }
+        results.c2 = {correct: c2correct, feedback: c2why};
+
+        // --- C3 ---
+        const c3 = norm(data.c3);
+        let c3correct = false;
+        let c3why = "";
+        if(
+            c3.includes("can't breathe") ||
+            c3.includes("cant breathe") ||
+            c3.includes("not breathing") ||
+            c3.includes("can't breathe right") ||
+            c3.includes("cant breathe right") ||
+            c3.includes("unconscious") ||
+            c3.includes("won't wake up") ||
+            c3.includes("wont wake up") ||
+            c3.includes("passed out") ||
+            c3.includes("face droop") ||
+            c3.includes("face is drooping") ||
+            c3.includes("slurred speech") ||
+            c3.includes("stroke") ||
+            c3.includes("throat swelling") ||
+            c3.includes("allergic") && c3.includes("breath") ||
+            c3.includes("seizure") && (c3.includes("minutes") || c3.includes("long"))
+        ){
+            c3correct = true;
+            c3why = "Yes. That's a life-threatening clue that means call 9-1-1 immediately.";
+        } else {
+            c3correct = false;
+            c3why = "Hint: Call 9-1-1 if they can't breathe, won't wake up, show stroke signs (face drooping / slurred speech), or severe allergic reaction.";
+        }
+        results.c3 = {correct: c3correct, feedback: c3why};
+
+        return results;
+    }
+
+    // ============
+    // SCORING (A+B objective + C short answer w/feedback)
+    // ============
+    /*
+        Answer key:
+        match1: Stroke
+        match2: Diabetic Emergency (Low Blood Sugar)
+        match3: Seizure
+        match4: Severe Allergic Reaction / Anaphylaxis
+
+        b1: C
+        b2: A
+        b3: C
+        b4: A
+        b5: A
+    */
+    function gradeWork(){
+        const data = getAllVals();
+        let score = 0;
+        let total = 0;
+
+        // matching
+        const matchKey = {
+            match1: "Stroke",
+            match2: "Diabetic Emergency (Low Blood Sugar)",
+            match3: "Seizure",
+            match4: "Severe Allergic Reaction / Anaphylaxis"
+        };
+        ["match1","match2","match3","match4"].forEach(q=>{
+            total++;
+            if((data[q]||"").trim() === matchKey[q]) score++;
+        });
+
+        // multiple choice
+        const mcKey = {
+            b1:"C",
+            b2:"A",
+            b3:"C",
+            b4:"A",
+            b5:"A"
+        };
+        ["b1","b2","b3","b4","b5"].forEach(q=>{
+            total++;
+            if((data[q]||"").trim() === mcKey[q]) score++;
+        });
+
+        const percent = total>0 ? Math.round((score/total)*100) : 0;
+
+        // short answers grading
+        const shortFeedback = gradeShortAnswers(data);
+        // We'll award soft credit for short answers:
+        // full credit if correct OR "almost there"
+        // (so kids aren't punished for wording).
+        let shortScore = 0;
+        let shortTotal = 3;
+
+        if(shortFeedback.c1.correct || shortFeedback.c1.feedback.startsWith("Almost")) shortScore++;
+        if(shortFeedback.c2.correct || shortFeedback.c2.feedback.startsWith("Almost")) shortScore++;
+        if(shortFeedback.c3.correct || shortFeedback.c3.feedback.startsWith("Almost")) shortScore++;
+
+        // We'll show everything in scoreBox.
+        const box = document.getElementById('scoreBox');
+        box.style.display = "block";
+        box.textContent =
+`Auto-check results:
+
+Sections A & B (multiple choice / matching):
+• ${score} / ${total} correct (${percent}%)
+
+Section C (short answers):
+C1: ${shortFeedback.c1.correct ? "✓" : "↺"} ${shortFeedback.c1.feedback}
+C2: ${shortFeedback.c2.correct ? "✓" : "↺"} ${shortFeedback.c2.feedback}
+C3: ${shortFeedback.c3.correct ? "✓" : "↺"} ${shortFeedback.c3.feedback}
+
+Short answer credit so far: ${shortScore} / ${shortTotal}
+If you see a "Hint", fix your answer above and hit Check My Score again to get full credit.
+
+Reminder: Be honest. This is meant to teach you how to respond in real emergencies.`;
+
+        showStatus("Score checked. Scroll to see feedback ✅");
+    }
+
+    // ============
+    // EMAIL BUILDER
+    // ============
+    function buildEmailBody(data){
+        let body =
+`Student: ${data.firstName} ${data.lastName}
+Email: ${data.studentEmail}
+
+SECTION A (Match):
+1: ${data.match1}
+2: ${data.match2}
+3: ${data.match3}
+4: ${data.match4}
+
+SECTION B (Multiple Choice):
+B1: ${data.b1}
+B2: ${data.b2}
+B3: ${data.b3}
+B4: ${data.b4}
+B5: ${data.b5}
+
+SECTION C (Short Answer):
+C1: ${data.c1}
+C2: ${data.c2}
+C3: ${data.c3}
+
+I confirm this is my own work.`;
+
+        return body;
+    }
+
+    function showStatus(msg){
+        const box = document.getElementById('statusArea');
+        box.textContent = msg;
+    }
+
+    function generateEmail(){
+        const data = getAllVals();
+
+        // basic validation
+        if(!data.firstName || !data.lastName || !data.studentEmail){
+            showStatus("❌ You must fill First Name, Last Name, and School Email first.");
+            return;
+        }
+
+        const subject = encodeURIComponent("Sudden Illness Worksheet - " + data.firstName + " " + data.lastName);
+        const body = encodeURIComponent(buildEmailBody(data));
+
+        // Update visible summary box so they can copy/paste if needed
+        document.getElementById('statusArea').textContent = buildEmailBody(data);
+
+        // Build mailto
+        const mailtoLink =
+            "mailto:jason.slaughter@pccsk12.com"
+            + "?subject=" + subject
+            + "&body=" + body;
+
+        // Open user's email client
+        window.location.href = mailtoLink;
+    }
+
+    // ============
+    // HOOK UP BUTTONS
+    // ============
+    document.getElementById('saveBtn').addEventListener('click', saveProgress);
+    document.getElementById('loadBtn').addEventListener('click', loadProgress);
+    document.getElementById('scoreBtn').addEventListener('click', gradeWork);
+    document.getElementById('emailBtn').addEventListener('click', generateEmail);
+
+    // OPTIONAL: auto-load on page open if data exists
+    (function autoLoadOnStart(){
+        try{
+            const raw = localStorage.getItem(SAVE_KEY);
+            if(raw){
+                const data = JSON.parse(raw);
+                setAllVals(data);
+                showStatus("Autosynced saved work ✅ (Finish and email when ready.)");
+            }
+        }catch(err){
+            // ignore
+        }
+    })();
+
+})();
+</script>
+
+</body>
+</html>
